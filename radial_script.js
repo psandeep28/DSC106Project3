@@ -4,6 +4,7 @@ const svg2 = d3.select("#radialChart").append("g").attr("transform", `translate(
 const tooltip = d3.select(".tooltip");
 const lineChart = d3.select("#lineChart");
 const miniChart = d3.select("#miniMap");
+let miniBrush = null;
 
 let selectedHours = [];
 const estrusDays = [2, 6, 10, 14];
@@ -18,6 +19,22 @@ Promise.all([
     d.StdActivity = +d.StdActivity;
     d.PercentActive = +d.PercentActive;
   });
+
+  d3.select("#resetButton").on("click", () => {
+    selectedHours = [];
+    d3.selectAll(".hourArc")
+      .attr("stroke", "none")
+      .attr("stroke-width", 0);
+    lineChart.selectAll("*").remove();
+    miniChart.selectAll("*").remove();
+  
+    // Properly reset the brush selection
+    if (miniBrush) {
+      miniChart.select(".brush").call(miniBrush.move, null);
+    }
+  });
+  
+  
 
   lines.forEach(d => {
     d.Hour = +d.Hour;
@@ -174,7 +191,7 @@ Promise.all([
   .attr("y", 30)
   .attr("fill", "deeppink")
   .attr("font-size", "10px")
-  .text("Estrus Day");
+  .text("Estrus Day ");
 
     });
 
@@ -275,22 +292,21 @@ Promise.all([
     drawMiniMap(mouseDataMap, hourList);
   }
   function drawMiniMap(mouseDataMap, hourList) {
-    const miniChart = d3.select("#miniMap");
     const xMini = d3.scaleLinear().domain([1, 14]).range([60, 860]);
     const yMini = d3.scaleLinear()
       .domain([0, d3.max(Array.from(mouseDataMap.values()).flat(), d => d.AvgActivity)])
       .range([100, 0]);
-
+  
     miniChart.selectAll("*").remove();
-
+  
     miniChart.append("g")
       .attr("transform", "translate(0,100)")
       .call(d3.axisBottom(xMini).ticks(14));
-
+  
     const lineMini = d3.line()
       .x(d => xMini(d.Day))
       .y(d => yMini(d.AvgActivity));
-
+  
     mouseDataMap.forEach(mouseData => {
       miniChart.append("path")
         .datum(mouseData)
@@ -299,23 +315,26 @@ Promise.all([
         .attr("stroke-width", 1)
         .attr("d", lineMini);
     });
-
-    const brush = d3.brushX()
+  
+    miniBrush = d3.brushX()
       .extent([[60, 0], [860, 100]])
       .on("end", event => {
         if (!event.selection) return;
-
+  
         const [x0, x1] = event.selection.map(xMini.invert);
         const dayRange = d3.range(Math.ceil(x0), Math.floor(x1) + 1);
-
+  
         const filteredData = lines.filter(d => {
           return hourList.includes(d.Hour) && dayRange.includes(d.Day);
         });
-
+  
         drawLineChart(filteredData, hourList);
       });
-
-    miniChart.append("g").call(brush);
+  
+    miniChart.append("g")
+      .attr("class", "brush")
+      .call(miniBrush);
   }
+  
 });
 

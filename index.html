@@ -27,11 +27,20 @@
     .mini-chart {
       margin-top: 10px;
     }
+
+    .brush .selection {
+  fill: #777;
+  fill-opacity: 0.3;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
   </style>
 </head>
 <body>
   <h2>Mouse Activity Rhythms: Female vs Male (Radial View)</h2>
-  
+
+  <button id="resetButton">Reset View</button>
+
   <!-- Radial Clock View -->
   <svg id="radialChart" width="1000" height="590"></svg>
 
