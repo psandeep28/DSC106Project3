@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Radial Activity Clock</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .tooltip {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 6px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+    }
+    svg {
+      margin-top: 20px;
+    }
+    .line-chart {
+      margin-top: 30px;
+    }
+    .mini-chart {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Mouse Activity Rhythms: Female vs Male (Radial View)</h2>
+  
+  <!-- Radial Clock View -->
+  <svg id="radialChart" width="1000" height="590"></svg>
+
+  <!-- Tooltip for hover -->
+  <div class="tooltip"></div>
+
+  <!-- Main Line Chart View -->
+  <svg id="lineChart" width="900" height="300" class="line-chart"></svg>
+
+  <!-- Mini Map for Zoom/Pan -->
+  <svg id="miniMap" width="900" height="120" class="mini-chart"></svg>
+
+  <!-- JS -->
+  <script src="radial_script.js"></script>
+</body>
+</html>
