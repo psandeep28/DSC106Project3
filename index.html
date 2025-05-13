@@ -54,5 +54,24 @@
   <svg id="miniMap" width="900" height="120" class="mini-chart"></svg>
   <!-- JS -->
   <script src="radial_script.js"></script>
+
+  <hr style="margin-top: 40px;">
+
+  <section id="writeup" style="max-width: 800px; margin: 40px auto; text-align: left; font-family: sans-serif;">
+    <h2 style="text-align: center;">Project Write-Up</h2>
+  
+    <h3>Design Rationale</h3>
+    <p>
+        The primary goal of our visualization was to allow intuitive exploration of circadian activity in the mice, with a primary focus on the distinction of male and female mice over time. To achieve this, we started with radial clocks to represent 24-hour activity patterns for each sex. We chose to go with a radial clock because it closely mirrors the natural cyclical structure of time/clocks, making it easier for viewers to spot rhythmic peaks and valleys. 
+        To further the comparison, we incorporated an interactive line chart that updates based on the hour selection from the radial clock. This allowed users to look more in depth on activity patterns of specific time across the entire timeline. We added peak markers and estrus day indicators to emphasize the importance of biological events that viewers usually wouldn’t be able to see. 
+        For interaction, we implemented hoverable hour selection that allows users to see specific details on hours and then click on groups of hours they might want to dive deeper into. Recognizing the potential for visual clutter, we added a brushable mini map under the line chart that supports zooming and panning over the 14 day span so viewers can focus in on areas that they care about and really try to identify trends that make a difference. 
+        Some alternatives were definitely considered like creating a heatmap that identified specific hot zones for activity for each individual mouse at individual times, however, it distracted from the message/comparison that we were trying to make. Tool-tip scatter plots were also considered, however, they lacked the temporal aspect that we were really seeking. At the end of the day, we prioritized visual clarity and biological relevance to make the visual more engaging and insightful.        
+    </p>
+  
+    <h3>Development Process</h3>
+    <p>
+        In order to develop our project, we decided to initially delegate a part of the task to everyone. For the first two days, we each individually came up with a prototype for an interactive visualization that explored our question. After the two day period, we met and shared visualizations, voting on the visualization that we would continue to build on for our final visualization submission. We chose to each propose a visualization in order to a
+    </p>
+  </section>
 </body>
 </html>
