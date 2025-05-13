@@ -334,6 +334,15 @@ Promise.all([
     miniChart.append("g")
       .attr("class", "brush")
       .call(miniBrush);
+
+      miniChart.append("text")
+      .attr("x", 150)
+      .attr("y", 10)
+      .attr("text-anchor", "middle")
+      .attr("font-size", "12px")
+      .attr("fill", "#555")
+      .text("Drag to select day range and zoom in above");
+      
   }
   
 });
